@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import IceLayer from './IceLayer'
+import IceHoverInfo from './IceHoverInfo'
 
 // Component to fit bounds when data changes and start at max zoom out
 function MapUpdater({ bounds }) {
@@ -127,6 +128,9 @@ function Map({ iceData, currentDay }) {
 
         {/* Ice data visualization layer */}
         <IceLayer key={currentDay} iceData={iceData} />
+        
+        {/* Hover info showing ice concentration */}
+        <IceHoverInfo key={currentDay} iceData={iceData} />
       </MapContainer>
     </div>
   )

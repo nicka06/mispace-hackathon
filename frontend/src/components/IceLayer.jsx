@@ -1,26 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
-
-// Helper function to convert ice concentration (0-100) to color
-function getIceColor(concentration) {
-  if (concentration === null || concentration === undefined || isNaN(concentration)) {
-    return null
-  }
-  
-  const value = Math.max(0, Math.min(100, concentration)) / 100
-  
-  if (value < 0.01) {
-    return null
-  }
-  
-  const r = Math.floor(200 * (1 - value))
-  const g = Math.floor(220 - 170 * value)
-  const b = Math.floor(255 - 55 * value)
-  const opacity = 0.4 + value * 0.6
-  
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`
-}
+import { getIceColor } from '../utils/iceUtils'
 
 // Generate image from ice data
 function generateIceImage(iceData) {
