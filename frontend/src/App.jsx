@@ -5,6 +5,7 @@ import TimeSlider from './components/TimeSlider'
 import Legend from './components/Legend'
 import InfoPanel from './components/InfoPanel'
 import NavigationControls from './components/NavigationControls'
+import RoutePlannerControls from './components/RoutePlannerControls'
 import './App.css'
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
   const [error, setError] = useState(null)
   const [showNavigation, setShowNavigation] = useState(true)
   const [useSlider, setUseSlider] = useState(false)
+  const [showRoutePlanner, setShowRoutePlanner] = useState(false)
+  const [isDrawing, setIsDrawing] = useState(false)
+  const [routePoints, setRoutePoints] = useState([])
+  const [routeAnalysis, setRouteAnalysis] = useState(null)
 
   // Load all ice data on mount
   useEffect(() => {
@@ -73,44 +78,71 @@ function App() {
         iceData={iceData[currentDay]} 
         currentDay={currentDay}
         showNavigation={showNavigation}
+        showRoutePlanner={showRoutePlanner}
+        isDrawing={isDrawing}
+        routePoints={routePoints}
+        setRoutePoints={setRoutePoints}
+        routeAnalysis={routeAnalysis}
       />
 
       {/* Floating UI panels */}
-      <InfoPanel currentDay={useSlider ? displayDay : currentDay} />
-      
-      {/* Toggle between buttons and slider */}
-      <div className="floating-panel view-toggle">
-        <button 
-          className={!useSlider ? 'active' : ''}
-          onClick={() => setUseSlider(false)}
-        >
-          📅 Days
-        </button>
-        <button 
-          className={useSlider ? 'active' : ''}
-          onClick={() => setUseSlider(true)}
-        >
-          🎬 Slider
-        </button>
-      </div>
-      
-      {useSlider ? (
-        <TimeSlider 
-          currentDay={currentDay}
-          onDayChange={setCurrentDay}
-          onDisplayChange={setDisplayDay}
-        />
-      ) : (
-        <DaySelector 
-          currentDay={currentDay} 
-          onDayChange={setCurrentDay} 
-        />
+      {!showRoutePlanner && (
+        <>
+          <InfoPanel currentDay={useSlider ? displayDay : currentDay} />
+          
+          {/* Toggle between buttons and slider */}
+          <div className="floating-panel view-toggle">
+            <button 
+              className={!useSlider ? 'active' : ''}
+              onClick={() => setUseSlider(false)}
+            >
+              📅 Days
+            </button>
+            <button 
+              className={useSlider ? 'active' : ''}
+              onClick={() => setUseSlider(true)}
+            >
+              🎬 Slider
+            </button>
+          </div>
+          
+          {useSlider ? (
+            <TimeSlider 
+              currentDay={currentDay}
+              onDayChange={setCurrentDay}
+              onDisplayChange={setDisplayDay}
+            />
+          ) : (
+            <DaySelector 
+              currentDay={currentDay} 
+              onDayChange={setCurrentDay} 
+            />
+          )}
+          
+          <Legend />
+          
+          <NavigationControls 
+            onToggle={setShowNavigation}
+          />
+        </>
       )}
       
-      <Legend />
-      
-      <NavigationControls 
-        onToggle={setShowNavigation}
+      <RoutePlannerControls
+        isDrawing={isDrawing}
+        onStartDrawing={() => {
+          setIsDrawing(true)
+          setShowRoutePlanner(true)
+        }}
+        onStopDrawing={() => setIsDrawing(false)}
+        onClearRoute={() => {
+          setRoutePoints([])
+          setIsDrawing(false)
+        }}
+        routePoints={routePoints}
+        iceData={iceData[currentDay]}
+        showPlanner={showRoutePlanner}
+        onTogglePlanner={setShowRoutePlanner}
+        onRouteAnalysisChange={setRouteAnalysis}
       />
     </div>
   )

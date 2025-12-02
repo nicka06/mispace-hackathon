@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import IceLayer from './IceLayer'
 import IceHoverInfo from './IceHoverInfo'
 import NavigationPoints from './NavigationPoints'
+import RoutePlanner from './RoutePlanner'
 
 // Component to fit bounds when data changes and start at max zoom out
 function MapUpdater({ bounds }) {
@@ -46,7 +47,7 @@ function MaxBoundsSetter({ bounds }) {
   return null
 }
 
-function Map({ iceData, currentDay, showNavigation = true }) {
+function Map({ iceData, currentDay, showNavigation = true, showRoutePlanner = false, isDrawing = false, routePoints = [], setRoutePoints }) {
   // Calculate tighter bounds from actual ice data
   // Sample grid points efficiently to find where ice actually exists
   const bounds = useMemo(() => {
@@ -137,6 +138,19 @@ function Map({ iceData, currentDay, showNavigation = true }) {
         <NavigationPoints 
           visible={showNavigation}
           iceData={iceData}
+        />
+        
+        {/* Route planner - custom route drawing */}
+        <RoutePlanner
+          visible={showRoutePlanner}
+          isDrawing={isDrawing}
+          routePoints={routePoints}
+          setRoutePoints={setRoutePoints}
+          routeAnalysis={null}
+          iceData={iceData}
+          onLandPointError={(lat, lng) => {
+            alert(`⚠️ This point (${lat.toFixed(4)}°N, ${Math.abs(lng).toFixed(4)}°W) appears to be on land. Please click on water only.`)
+          }}
         />
       </MapContainer>
     </div>

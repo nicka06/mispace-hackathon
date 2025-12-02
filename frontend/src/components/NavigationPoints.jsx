@@ -55,25 +55,30 @@ const CRITICAL_CHOKEPOINTS = [
   },
 ]
 
-// USCG Icebreaker positions (simulated for demonstration)
+// USCG Icebreaker positions
+// Based on USCG Great Lakes icebreaking fleet
 const ICEBREAKERS = [
   {
     id: 'mackinaw',
     name: 'USCGC Mackinaw',
     position: [45.8174, -84.7278], // Straits of Mackinac
-    callsign: 'WGLB',
+    callsign: 'WAGB-83',
     class: 'Heavy Icebreaker',
     length: '240 ft',
-    mission: 'Straits patrol and escort operations',
+    displacement: '5,000 tons',
+    operation: 'Operation Taconite',
+    mission: 'Primary heavy icebreaker for Great Lakes. Conducts icebreaking operations, escorts commercial vessels, and maintains navigable tracks through critical chokepoints including Straits of Mackinac.',
   },
   {
     id: 'bristol-bay',
     name: 'USCGC Bristol Bay',
-    position: [46.5063, -84.3475], // Soo Locks
+    position: [46.5063, -84.3475], // Soo Locks / St. Mary's River
     callsign: 'WTGB-102',
     class: 'Bay-class Ice Breaking Tug',
     length: '140 ft',
-    mission: 'Soo Locks escort and St. Mary\'s River operations',
+    displacement: '662 tons',
+    operation: 'Operation Taconite',
+    mission: 'Ice breaking tug supporting Operation Taconite. Maintains St. Mary\'s River passage and escorts iron ore carriers through Soo Locks during winter operations.',
   },
   {
     id: 'neah-bay',
@@ -82,7 +87,9 @@ const ICEBREAKERS = [
     callsign: 'WTGB-105',
     class: 'Bay-class Ice Breaking Tug',
     length: '140 ft',
-    mission: 'Detroit River channel maintenance',
+    displacement: '662 tons',
+    operation: 'Operation Coal Shovel',
+    mission: 'Ice breaking tug supporting Operation Coal Shovel. Maintains shipping lanes in Detroit River and St. Clair River system, ensuring passage for essential cargoes.',
   },
 ]
 
@@ -261,12 +268,32 @@ function NavigationPoints({ visible, iceData }) {
                 <div style={{ marginBottom: '4px' }}>
                   <strong>Length:</strong> {vessel.length}
                 </div>
+                {vessel.displacement && (
+                  <div style={{ marginBottom: '4px' }}>
+                    <strong>Displacement:</strong> {vessel.displacement}
+                  </div>
+                )}
+                {vessel.operation && (
+                  <div style={{ 
+                    marginTop: '6px',
+                    marginBottom: '6px',
+                    padding: '6px',
+                    background: '#e3f2fd',
+                    borderRadius: '4px',
+                    fontWeight: '700',
+                    color: '#1565C0',
+                    fontSize: '11px'
+                  }}>
+                    🚢 {vessel.operation}
+                  </div>
+                )}
                 <div style={{ 
                   marginTop: '8px',
                   padding: '8px',
-                  background: '#e3f2fd',
+                  background: '#f5f7fa',
                   borderRadius: '4px',
-                  fontSize: '12px'
+                  fontSize: '12px',
+                  lineHeight: '1.5'
                 }}>
                   <strong>Mission:</strong><br/>
                   {vessel.mission}
