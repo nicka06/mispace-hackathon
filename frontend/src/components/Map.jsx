@@ -4,6 +4,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import IceLayer from './IceLayer'
 import IceHoverInfo from './IceHoverInfo'
+import NavigationPoints from './NavigationPoints'
 
 // Component to fit bounds when data changes and start at max zoom out
 function MapUpdater({ bounds }) {
@@ -45,7 +46,7 @@ function MaxBoundsSetter({ bounds }) {
   return null
 }
 
-function Map({ iceData, currentDay }) {
+function Map({ iceData, currentDay, showNavigation = true }) {
   // Calculate tighter bounds from actual ice data
   // Sample grid points efficiently to find where ice actually exists
   const bounds = useMemo(() => {
@@ -131,6 +132,12 @@ function Map({ iceData, currentDay }) {
         
         {/* Hover info showing ice concentration */}
         <IceHoverInfo key={currentDay} iceData={iceData} />
+        
+        {/* Navigation points - critical chokepoints and icebreakers */}
+        <NavigationPoints 
+          visible={showNavigation}
+          iceData={iceData}
+        />
       </MapContainer>
     </div>
   )

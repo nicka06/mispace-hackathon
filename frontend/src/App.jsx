@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react'
 import Map from './components/Map'
 import DaySelector from './components/DaySelector'
+import TimeSlider from './components/TimeSlider'
 import Legend from './components/Legend'
 import InfoPanel from './components/InfoPanel'
+import NavigationControls from './components/NavigationControls'
 import './App.css'
 
 function App() {
   const [currentDay, setCurrentDay] = useState(1)
+  const [displayDay, setDisplayDay] = useState(1) // For showing fractional days
   const [iceData, setIceData] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showNavigation, setShowNavigation] = useState(true)
+  const [useSlider, setUseSlider] = useState(false)
 
   // Load all ice data on mount
   useEffect(() => {
@@ -67,17 +72,46 @@ function App() {
       <Map 
         iceData={iceData[currentDay]} 
         currentDay={currentDay}
+        showNavigation={showNavigation}
       />
 
       {/* Floating UI panels */}
-      <InfoPanel currentDay={currentDay} />
+      <InfoPanel currentDay={useSlider ? displayDay : currentDay} />
       
-      <DaySelector 
-        currentDay={currentDay} 
-        onDayChange={setCurrentDay} 
-      />
+      {/* Toggle between buttons and slider */}
+      <div className="floating-panel view-toggle">
+        <button 
+          className={!useSlider ? 'active' : ''}
+          onClick={() => setUseSlider(false)}
+        >
+          📅 Days
+        </button>
+        <button 
+          className={useSlider ? 'active' : ''}
+          onClick={() => setUseSlider(true)}
+        >
+          🎬 Slider
+        </button>
+      </div>
+      
+      {useSlider ? (
+        <TimeSlider 
+          currentDay={currentDay}
+          onDayChange={setCurrentDay}
+          onDisplayChange={setDisplayDay}
+        />
+      ) : (
+        <DaySelector 
+          currentDay={currentDay} 
+          onDayChange={setCurrentDay} 
+        />
+      )}
       
       <Legend />
+      
+      <NavigationControls 
+        onToggle={setShowNavigation}
+      />
     </div>
   )
 }

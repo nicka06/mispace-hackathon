@@ -49,7 +49,7 @@
 
 /* Top right - Day selector */
 .day-selector {
-  top: 20px;
+  top: 75px;
   right: 20px;
 }
 
@@ -171,4 +171,277 @@
 
 .ice-hover-popup .popup-value.highlight {
   color: #007bff;
+}
+
+/* Navigation controls panel */
+.navigation-controls {
+  bottom: 20px;
+  left: 20px;
+  min-width: 280px;
+  max-width: 320px;
+}
+
+.navigation-controls h3 {
+  font-size: 16px;
+  margin: 0 0 16px 0;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.navigation-controls h4 {
+  font-size: 13px;
+  margin: 0 0 10px 0;
+  color: #666;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-switch input[type="checkbox"] {
+  width: 48px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  appearance: none;
+  background: #ccc;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked {
+  background: #007bff;
+}
+
+.toggle-switch input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle-switch input[type="checkbox"]:checked::before {
+  transform: translateX(24px);
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.info-section {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #333;
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+.legend-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.legend-marker.critical {
+  background: linear-gradient(135deg, #D32F2F, #F57C00);
+}
+
+.legend-marker.icebreaker {
+  background: #1565C0;
+}
+
+.legend-zone {
+  width: 16px;
+  height: 16px;
+  border: 2px dashed #D32F2F;
+  border-radius: 50%;
+  background: rgba(211, 47, 47, 0.1);
+  flex-shrink: 0;
+}
+
+.info-note {
+  padding: 10px;
+  background: #e3f2fd;
+  border-left: 4px solid #1976D2;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.info-note strong {
+  color: #1565C0;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.info-note small {
+  color: #666;
+}
+
+/* View toggle */
+.view-toggle {
+  top: 20px;
+  right: 20px;
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+  background: #f8f9fa;
+}
+
+.view-toggle button {
+  padding: 8px 16px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: #666;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.view-toggle button:hover {
+  background: white;
+  color: #007bff;
+}
+
+.view-toggle button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Time slider panel */
+.time-slider-panel {
+  top: 75px;
+  right: 20px;
+  min-width: 300px;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.slider-header h3 {
+  font-size: 16px;
+  margin: 0;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.current-day-badge {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  padding: 6px 14px;
+  background: #007bff;
+  border-radius: 20px;
+}
+
+.slider-track {
+  margin-bottom: 16px;
+}
+
+.time-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.time-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #007bff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.time-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.time-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #007bff;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.slider-markers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+}
+
+.play-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #28a745;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.play-button:hover {
+  background: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.play-button:active {
+  transform: translateY(0);
 }
