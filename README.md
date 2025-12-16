@@ -1,8 +1,8 @@
 # mispace-hackathon
 
-This is Nick's hackathon project for the MISpace Ice Prediction Hackathon.
+This is Nick's hackathon project for Hackathon on Devpost.
 
-To view the website that I built, please go to the url https://mispace-hackathon.vercel.app/
+To view the website that I built, please go to the url https://nicka-hackathon.vercel.app/
 
 This project was first started in a google colab where I created a linear regression model to predict the ice cover. To view that notebook, you can upload the ipynb into your personal colab. 
 
